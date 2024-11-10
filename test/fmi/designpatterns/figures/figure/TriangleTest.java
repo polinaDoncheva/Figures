@@ -8,7 +8,8 @@ public class TriangleTest {
     @Test
     public void testPerimeter() {
         Triangle triangle = new Triangle(3, 4, 5);
-        assertEquals(12, triangle.perimeter(), 0.0001, "Triangle perimeter should be 12.");
+        assertEquals(12, triangle.perimeter(), 0.0001,
+                "Triangle perimeter should be 12.");
     }
 
     @Test
@@ -33,7 +34,7 @@ public class TriangleTest {
     @Test
     public void testClone() throws CloneNotSupportedException {
         Triangle triangle1 = new Triangle(3, 4, 5);
-        Triangle triangle2 = (Triangle) triangle1.clone();
+        Figure triangle2 = triangle1.clone();
 
         assertNotSame(triangle1, triangle2,
                 "The cloned triangle should be a different object from the original.");

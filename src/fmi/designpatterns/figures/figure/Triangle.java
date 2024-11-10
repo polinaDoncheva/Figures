@@ -1,4 +1,4 @@
-package com.fmi.figures.figure;
+package fmi.designpatterns.figures.figure;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +31,7 @@ public class Triangle implements Figure {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Figure clone() throws CloneNotSupportedException {
         Triangle clonedTriangle = (Triangle) super.clone();
 
         clonedTriangle.sides = new ArrayList<>(this.sides);

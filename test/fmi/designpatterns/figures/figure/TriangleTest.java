@@ -1,4 +1,4 @@
-package com.fmi.figures.figure;
+package fmi.designpatterns.figures.figure;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ public class TriangleTest {
     @Test
     public void testPerimeter() {
         Triangle triangle = new Triangle(3, 4, 5);
-        assertEquals(12, triangle.perimeter(), "Perimeter should be 12.");
+        assertEquals(12, triangle.perimeter(), 0.0001, "Triangle perimeter should be 12.");
     }
 
     @Test
@@ -20,7 +20,7 @@ public class TriangleTest {
     @Test
     public void testNegativeSides() {
         assertThrows(IllegalArgumentException.class, () -> new Triangle(3, -4, 5),
-                "Exception should be thrown, when side is negative.");
+                "Exception should be thrown, when triangle side is negative.");
     }
 
     @Test

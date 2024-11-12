@@ -4,6 +4,7 @@ import fmi.designpatterns.figures.figure.Figure;
 import fmi.designpatterns.figures.figure.Rectangle;
 import fmi.designpatterns.figures.stringToFigureFactory.stringParser.StringToFigure;
 
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -18,9 +19,11 @@ public class StringToRectangle extends StringToFigure {
         }
 
         Scanner scanner = new Scanner(representation);
+        scanner.useLocale(Locale.US);
+
         scanner.next();
-        double side1 = scanner.nextDouble();;
-        double side2 = scanner.nextDouble();;
+        double side1 = scanner.nextDouble();
+        double side2 = scanner.nextDouble();
 
         return new Rectangle(side1, side2);
     }

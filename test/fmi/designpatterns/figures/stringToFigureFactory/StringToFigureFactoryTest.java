@@ -28,8 +28,8 @@ class StringToFigureFactoryTest {
 
     @Test
     public void testRectangleCreateFrom() {
-        assertEquals("rectangle 4.0 5.0",
-                factory.createFrom("rectangle 4 5").toString(),
+        assertEquals("rectangle 4.0 5.1",
+                factory.createFrom("rectangle 4 5.1").toString(),
                 "Invalid creating of rectangle from string");
     }
 
@@ -47,8 +47,8 @@ class StringToFigureFactoryTest {
 
     @Test
     public void testTriangleCreateFrom() {
-        assertEquals("triangle 3.0 4.0 5.0",
-                factory.createFrom("triangle 3 4 5").toString(),
+        assertEquals("triangle 3.1 4.0 5.0",
+                factory.createFrom("triangle 3.1 4 5").toString(),
                 "Invalid creating of triangle from string.");
     }
 

@@ -4,6 +4,7 @@ import fmi.designpatterns.figures.figure.Figure;
 import fmi.designpatterns.figures.figure.Triangle;
 import fmi.designpatterns.figures.stringToFigureFactory.stringParser.StringToFigure;
 
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,10 +22,12 @@ public class StringToTriangle extends StringToFigure {
         }
 
         Scanner scanner = new Scanner(representation);
+        scanner.useLocale(Locale.US);
+
         scanner.next();
-        double side1 = scanner.nextDouble();;
-        double side2 = scanner.nextDouble();;
-        double side3 = scanner.nextDouble();;
+        double side1 = scanner.nextDouble();
+        double side2 = scanner.nextDouble();
+        double side3 = scanner.nextDouble();
 
         return new Triangle(side1, side2, side3);
     }

@@ -1,27 +1,21 @@
 package fmi.designpatterns.figures.figureFactory;
 
 import fmi.designpatterns.figures.figure.Figure;
-import fmi.designpatterns.figures.stringToFigureFactory.StringToFigureFactory;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class RandomFigureFactory extends AbstractFigureFactory {
-    private static List<FigureEntry> entries = new ArrayList<>();
-    private static double sideMin = 5;
-    private static double sideRange = 45;
+    private final List<FigureEntry> entries;
+    private final static double sideMin = 5;
+    private final static double sideRange = 45;
+    private final Random random = new Random();
+    StringToFigureFactory stringFactory;
 
-    static {
-        entries.add(new FigureEntry("triangle", 3));
-        entries.add(new FigureEntry("circle", 1));
-        entries.add(new FigureEntry("rectangle", 2));
+    public RandomFigureFactory(List<FigureEntry> entries) {
+        stringFactory = new StringToFigureFactory(entries);
+        this.entries = entries;
     }
-
-    private Random random = new Random();
-    StringToFigureFactory stringFactory = new StringToFigureFactory();
 
     @Override
     public Figure create() {
@@ -30,13 +24,13 @@ public class RandomFigureFactory extends AbstractFigureFactory {
         StringBuilder representation = new StringBuilder(entry.name());
 
         for (int i = 0; i < entry.argumentsCount(); i++) {
-            representation.append(" ").append(randomDouble());
+            representation.append(" ").append(randomPositiveDouble());
         }
 
         return stringFactory.createFrom(representation.toString());
     }
 
-    private double randomDouble() {
+    private double randomPositiveDouble() {
         return sideMin + random.nextDouble() * sideRange;
     }
 }

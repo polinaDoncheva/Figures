@@ -7,25 +7,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class AbstractFigureFactory {
     public abstract Figure create() throws IOException;
 
-    public static AbstractFigureFactory getFactory(String input) throws FileNotFoundException {
+    public static AbstractFigureFactory getFactory(String input, List<FigureEntry> entries) throws FileNotFoundException {
         Scanner scanner = new Scanner(input);
         String operation = scanner.next();
 
         if (operation.equals("standard") && !scanner.hasNext()) {
-            return new StreamFigureFactory(new BufferedReader(new InputStreamReader(System.in)));
+            return new StreamFigureFactory(new BufferedReader(new InputStreamReader(System.in)), entries);
         }
         if (operation.equals("file") && scanner.hasNext()) {
-            return new StreamFigureFactory(new BufferedReader(new FileReader(scanner.next())));
+            return new StreamFigureFactory(new BufferedReader(new FileReader(scanner.next())), entries);
         }
         if (operation.equals("random") && !scanner.hasNext()) {
-            return new RandomFigureFactory();
+            return new RandomFigureFactory(entries);
         }
         throw new IllegalArgumentException("Unknown factory method");
     }

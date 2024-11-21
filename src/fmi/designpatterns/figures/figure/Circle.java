@@ -1,10 +1,8 @@
 package fmi.designpatterns.figures.figure;
 
-import java.util.ArrayList;
-
 public class Circle implements Figure {
     private double radius;
-    private static double pi = 3.14;
+    private final static double pi = 3.14;
 
     public Circle(double radius) {
         if (radius <= 0) {

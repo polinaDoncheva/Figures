@@ -2,37 +2,39 @@ package fmi.designpatterns.figures.figure;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TriangleTest {
+class TriangleTest {
     @Test
-    public void testPerimeter() {
+    void testPerimeter() {
         Triangle triangle = new Triangle(3, 4, 5);
         assertEquals(12, triangle.perimeter(), 0.0001,
                 "Triangle perimeter should be 12.");
     }
 
     @Test
-    public void testInvalidSides() {
+    void testInvalidSides() {
         assertThrows(IllegalArgumentException.class, () -> new Triangle(1, 2, 3),
                 "Exception should be thrown, when sides do not form triangle.");
     }
 
     @Test
-    public void testNegativeSides() {
+    void testNegativeSides() {
         assertThrows(IllegalArgumentException.class, () -> new Triangle(3, -4, 5),
                 "Exception should be thrown, when triangle side is negative.");
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         Triangle triangle = new Triangle(5, 3, 4);
         assertEquals("triangle 3.0 4.0 5.0", triangle.toString(),
                 "String representation for triangle is invalid.");
     }
 
     @Test
-    public void testClone() throws CloneNotSupportedException {
+    void testClone() throws CloneNotSupportedException {
         Triangle triangle1 = new Triangle(3, 4, 5);
         Figure triangle2 = triangle1.clone();
 

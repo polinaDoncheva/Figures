@@ -1,10 +1,8 @@
 package fmi.designpatterns.figures.figure;
 
-import java.util.ArrayList;
-
 public class Circle implements Figure {
     private double radius;
-    private static double pi = 3.14;
+    private static final double PI = 3.14;
 
     public Circle(double radius) {
         if (radius <= 0) {
@@ -16,7 +14,7 @@ public class Circle implements Figure {
 
     @Override
     public double perimeter() {
-        return 2 * pi * radius;
+        return 2 * PI * radius;
     }
 
     @Override

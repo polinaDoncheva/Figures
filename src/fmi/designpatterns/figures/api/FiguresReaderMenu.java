@@ -16,9 +16,7 @@ public class FiguresReaderMenu {
     }
 
     public List<Figure> read(AbstractFigureFactory factory, List<FigureEntry> entries) {
-
         System.out.println("enter number of figures to be created: ");
-
         int number = scanner.nextInt();
         scanner.nextLine();
 
@@ -27,14 +25,12 @@ public class FiguresReaderMenu {
         }
 
         List<Figure> result = new ArrayList<>(number);
-
         displayFiguresOptions(entries);
         System.out.println("expected input: " + number + " lines following any of the patterns");
 
         for (int i = 0; i < number; i++) {
             result.add(factory.create());
         }
-
         return result;
     }
 

@@ -1,4 +1,4 @@
-package fmi.designpatterns.figures.figureFactory;
+package fmi.designpatterns.figures.factory;
 
 import fmi.designpatterns.figures.figure.Circle;
 import fmi.designpatterns.figures.figure.Rectangle;
@@ -12,7 +12,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StreamFigureFactoryTest {
     private final List<FigureEntry> entries = new ArrayList<>();

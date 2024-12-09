@@ -1,5 +1,6 @@
-package fmi.designpatterns.figures.figureFactory;
+package fmi.designpatterns.figures.factory;
 
+import fmi.designpatterns.figures.exceptions.StreamReaderException;
 import fmi.designpatterns.figures.figure.Figure;
 
 import java.io.BufferedReader;
@@ -16,8 +17,14 @@ public class StreamFigureFactory extends AbstractFigureFactory {
     }
 
     @Override
-    public Figure create() throws IOException {
-        String line = reader.readLine();
+    public Figure create() {
+        String line = null;
+
+        try {
+            line = reader.readLine();
+        } catch (IOException e) {
+            throw new StreamReaderException("Could not create a figure. Invalid read from stream.");
+        }
 
         if (line == null) {
             throw new IllegalArgumentException("Can not create figure. Stream is empty.");

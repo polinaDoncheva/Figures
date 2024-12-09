@@ -1,4 +1,4 @@
-package fmi.designpatterns.figures.figureFactory;
+package fmi.designpatterns.figures.factory;
 
 import fmi.designpatterns.figures.figure.Figure;
 
@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class RandomFigureFactory extends AbstractFigureFactory {
     private final List<FigureEntry> entries;
-    private final static double sideMin = 5;
-    private final static double sideRange = 45;
+    private static final double SIDE_MIN = 5;
+    private static final double SIDE_RANGE = 45;
     private final Random random = new Random();
     StringToFigureFactory stringFactory;
 
@@ -31,6 +31,6 @@ public class RandomFigureFactory extends AbstractFigureFactory {
     }
 
     private double randomPositiveDouble() {
-        return sideMin + random.nextDouble() * sideRange;
+        return SIDE_MIN + random.nextDouble() * SIDE_RANGE;
     }
 }

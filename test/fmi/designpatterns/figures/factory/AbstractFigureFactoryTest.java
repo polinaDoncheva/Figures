@@ -1,4 +1,4 @@
-package fmi.designpatterns.figures.figureFactory;
+package fmi.designpatterns.figures.factory;
 
 import fmi.designpatterns.figures.figure.Circle;
 import fmi.designpatterns.figures.figure.Rectangle;
@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AbstractFigureFactoryTest {
     private final List<FigureEntry> entries = new ArrayList<>();
@@ -26,7 +28,7 @@ class AbstractFigureFactoryTest {
     @Test
     void testGetFactoryWithStandardInput() throws IOException {
         assertInstanceOf(StreamFigureFactory.class,
-                AbstractFigureFactory.getFactory("standard", entries));
+                AbstractFigureFactory.of("standard", entries));
     }
 
     @Test
@@ -35,7 +37,7 @@ class AbstractFigureFactoryTest {
         tempFile.deleteOnExit();
 
         AbstractFigureFactory factory = AbstractFigureFactory.
-                getFactory("file " + tempFile.getAbsolutePath(), entries);
+                of("file " + tempFile.getAbsolutePath(), entries);
 
         assertNotNull(factory);
         assertInstanceOf(StreamFigureFactory.class, factory);
@@ -44,30 +46,30 @@ class AbstractFigureFactoryTest {
     @Test
     void testGetFactoryWithRandomInput() throws IOException {
         assertInstanceOf(RandomFigureFactory.class,
-                AbstractFigureFactory.getFactory("random", entries));
+                AbstractFigureFactory.of("random", entries));
     }
 
     @Test
     void testGetFactoryWithInvalidInput() {
         assertThrows(IllegalArgumentException.class,
-                () -> AbstractFigureFactory.getFactory("unknown", entries));
+                () -> AbstractFigureFactory.of("unknown", entries));
     }
 
     @Test
     void testGetFactoryWithRandomExtraParameters() {
         assertThrows(IllegalArgumentException.class,
-                () -> AbstractFigureFactory.getFactory("random extra", entries));
+                () -> AbstractFigureFactory.of("random extra", entries));
     }
 
     @Test
     void testGetFactoryWithStandardExtraParameters() {
         assertThrows(IllegalArgumentException.class,
-                () -> AbstractFigureFactory.getFactory("standard extra", entries));
+                () -> AbstractFigureFactory.of("standard extra", entries));
     }
 
     @Test
     void testGetFactoryWithFileLessParameters() {
         assertThrows(IllegalArgumentException.class,
-                () -> AbstractFigureFactory.getFactory("file", entries));
+                () -> AbstractFigureFactory.of("file", entries));
     }
 }

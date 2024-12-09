@@ -3,14 +3,15 @@ package fmi.designpatterns.figures.stringToFigureFactory;
 import fmi.designpatterns.figures.figure.Circle;
 import fmi.designpatterns.figures.figure.Rectangle;
 import fmi.designpatterns.figures.figure.Triangle;
-import fmi.designpatterns.figures.figureFactory.FigureEntry;
+import fmi.designpatterns.figures.factory.FigureEntry;
 
-import fmi.designpatterns.figures.figureFactory.StringToFigureFactory;
+import fmi.designpatterns.figures.factory.StringToFigureFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringToFigureFactoryTest {
     private final StringToFigureFactory factory = new StringToFigureFactory(List.of(

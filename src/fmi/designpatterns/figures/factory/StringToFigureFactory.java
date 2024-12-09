@@ -1,5 +1,6 @@
-package fmi.designpatterns.figures.figureFactory;
+package fmi.designpatterns.figures.factory;
 
+import fmi.designpatterns.figures.exceptions.FigureCreationException;
 import fmi.designpatterns.figures.figure.Figure;
 
 import java.lang.reflect.Constructor;
@@ -7,8 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StringToFigureFactory {
     private final List<FigureEntry> entries;
@@ -19,10 +18,7 @@ public class StringToFigureFactory {
 
     public Figure createFrom(String representation) {
         for (FigureEntry entry : entries) {
-            Pattern pattern = Pattern.compile(entry.regex());
-            Matcher matcher = pattern.matcher(representation);
-
-            if (matcher.matches()) {
+            if (representation.matches(entry.regex())) {
                 return getInstance(entry, representation);
             }
         }
@@ -38,7 +34,7 @@ public class StringToFigureFactory {
         try {
             result = (Figure) constructor.newInstance(parameters);
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            throw new IllegalArgumentException("Error while creating an instance from matching string: "
+            throw new FigureCreationException("Error while creating an instance from matching string: "
                     + e.getMessage());
         }
 

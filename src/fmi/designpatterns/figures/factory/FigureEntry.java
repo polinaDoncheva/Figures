@@ -1,4 +1,4 @@
-package fmi.designpatterns.figures.figureFactory;
+package fmi.designpatterns.figures.factory;
 
 import fmi.designpatterns.figures.figure.Figure;
 

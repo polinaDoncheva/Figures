@@ -1,9 +1,8 @@
 package fmi.designpatterns.figures.api;
 
-import fmi.designpatterns.figures.figureFactory.AbstractFigureFactory;
-import fmi.designpatterns.figures.figureFactory.FigureEntry;
+import fmi.designpatterns.figures.factory.AbstractFigureFactory;
+import fmi.designpatterns.figures.factory.FigureEntry;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ public class FactoryReaderMenu {
         this.scanner = scanner;
     }
 
-    public AbstractFigureFactory read(List<FigureEntry> entries) throws FileNotFoundException {
+    public AbstractFigureFactory read(List<FigureEntry> entries) {
         while (true) {
             System.out.println("<help> displays options");
             System.out.println("<end> terminates program");
@@ -27,7 +26,7 @@ public class FactoryReaderMenu {
                     displayFactoryOptions();
                     break;
                 default:
-                    return AbstractFigureFactory.getFactory(choice, entries);
+                    return AbstractFigureFactory.of(choice, entries);
             }
         }
     }

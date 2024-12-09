@@ -1,5 +1,6 @@
 package fmi.designpatterns.figures.api;
 
+import fmi.designpatterns.figures.exceptions.StreamWriterException;
 import fmi.designpatterns.figures.figure.Figure;
 import fmi.designpatterns.figures.figure.FigureByStringComparator;
 
@@ -17,7 +18,7 @@ public class FiguresOperationsMenu {
         this.scanner = scanner;
     }
 
-    public void execute(List<Figure> figures) throws IOException {
+    public void execute(List<Figure> figures) {
         while (true) {
             System.out.println("<help> displays options");
             System.out.println("<end> terminates program");
@@ -36,7 +37,11 @@ public class FiguresOperationsMenu {
                     saveToStream(figures, new BufferedWriter(new OutputStreamWriter(System.out)));
                     break;
                 case "save file":
-                    saveToStream(figures, new BufferedWriter(new FileWriter(readFileName())));
+                    try {
+                        saveToStream(figures, new BufferedWriter(new FileWriter(readFileName())));
+                    } catch (IOException e) {
+                        throw new StreamWriterException("Could not write to stream. Invalid file  operation.");
+                    }
                     break;
                 default:
                     throw new UnsupportedOperationException("Invalid operation.");
@@ -50,12 +55,29 @@ public class FiguresOperationsMenu {
         System.out.println("<save file> saves figures to file");
     }
 
-    private void saveToStream(List<Figure> figures, BufferedWriter writer) throws IOException {
-        for (Figure figure : figures) {
-            writer.write(figure.toString());
-            writer.newLine();
+    private void saveToStream(List<Figure> figures, BufferedWriter writer) {
+        try {
+            for (Figure figure : figures) {
+                writer.write(figure.toString());
+                writer.newLine();
+            }
+            writer.flush();
+
+        } catch (IOException e) {
+            closeWriter(writer);
+            throw new StreamWriterException("Could not write to stream. Invalid output operation.");
         }
-        writer.flush();
+    }
+
+    private void closeWriter(BufferedWriter writer) {
+        if (writer != null) {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                throw new StreamWriterException("Could not write to stream. Fail while closing writer"
+                        + e.getMessage());
+            }
+        }
     }
 
     private void sortFigures(List<Figure> figures) {
@@ -63,8 +85,8 @@ public class FiguresOperationsMenu {
     }
 
     private String readFileName() {
-        System.out.println("enter file name: ");
+        System.out.print("enter file name: ");
 
-        return scanner.next();
+        return scanner.nextLine();
     }
 }
